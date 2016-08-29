@@ -1,7 +1,3 @@
 {
-  "production": {
-    "pluginsOptions":{
-    }
-  },
-  "dev": {}
+  "venderName":"vendor"
 }
