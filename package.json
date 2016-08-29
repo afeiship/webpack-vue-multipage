@@ -8,7 +8,9 @@
     "email": "1290657123@qq.com"
   },
   "scripts": {
-    "build": "rm -rf dist && cd src && webpack --config webpack.config.product.js"
+    "clean": "rimraf dist",
+    "build": "npm run clean && cd src && webpack -p --config webpack.config.product.js",
+    "dev": "npm run clean && cd src && webpack-dev-server --inline --progress --colors --port 8090 --config webpack.config.development.js"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -46,8 +48,9 @@
     "vue-loader": "^7.2.0",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.0",
-    "webpack-dev-server": "^1.14.0",
+    "webpack-dev-server": "^1.15.0",
     "webpack-entries": "afeiship/webpack-entries",
+    "webpack-hot-middleware": "^2.12.2",
     "webpack-init": "^0.1.1",
     "yargs": "^4.7.1"
   }

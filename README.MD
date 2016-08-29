@@ -17,7 +17,28 @@ Vue multipage app based on webpack.
 
 ##todos:
 - [ ] need yo generator.
-- [ ] hot reload & dev config file.
+- [x] hot reload & dev config file.
+  + http://localhost:8080/webpack-dev-server/modules/auth
+  + http://localhost:8080/webpack-dev-server/modules/detail
+  + http://localhost:8080/webpack-dev-server/modules/home
+  + http://localhost:8080/webpack-dev-server/modules/list
+
+##build command:
+  - scripts:
+  ```json
+  {
+      "clean": "rimraf dist",
+      "build": "npm run clean && cd src && webpack -p --config webpack.config.product.js",
+      "dev": "npm run clean && cd src && webpack-dev-server --inline --progress --colors --port 8090 --config webpack.config.development.js"
+  }
+  ```
+
+  - bash command:
+  ```bash
+  npm run clean
+  npm run dev
+  npm run build
+  ```
 
 
 ##server config:

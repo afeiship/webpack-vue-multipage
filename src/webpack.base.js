@@ -12,40 +12,9 @@
     new webpack.ProvidePlugin({
       Vue: 'vue'
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      mangle: false
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
     new webpack.NoErrorsPlugin(),
     // split vendor js into its own file,
-    new ExtractTextPlugin('[name][hash:5].css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: config.venderName,
-      minChunks: function(module, count) {
-        // any required modules inside node_modules are extracted to vendor
-        return (
-          module.resource &&
-          /\.(js|css|less|scss)$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
-      }
-    }),
-    new PurifyCSSPlugin({
-      paths: [
-        'modules/**/*.html'
-      ],
-      purifyOptions: {
-        minify: true,
-        info: true
-      }
-    })
+    new ExtractTextPlugin('[name][hash:5].css')
   ];
 
   module.exports = {
@@ -109,8 +78,7 @@
         components: path.join(__dirname, 'components'),
         images: path.join(__dirname, 'assets/images')
       }
-    },
-    devtool: '#source-map'
+    }
   };
 
 }());
