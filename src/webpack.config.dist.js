@@ -4,26 +4,45 @@
   var fs = require('fs');
   var path = require('path');
   var entries = require('webpack-entries');
+  var config = require('./config.json');
+
+  console.log(config);
 
   //Plugin lists:
   var ExtractTextPlugin = require('extract-text-webpack-plugin');
   var HtmlWebpackPlugin = require('html-webpack-plugin');
   var PurifyCSSPlugin = require('purifycss-webpack-plugin');
-  var AssetsPlugin = require('assets-webpack-plugin');
+  var webpackEntries = entries('modules/**/*.js');
+  var webpackPlugins = [];
 
+  //init html-webpack-plugin:
+  Object.keys(webpackEntries).forEach(function(name) {
+    // console.log(name);
+    // modules/auth/index
+    // modules/detail/index
+    // modules/global
+    // modules/home/index
+    // modules/list/index
+    if (name.indexOf('index') > -1) {
+      var plugin = new HtmlWebpackPlugin({
+        filename: name + '.html',
+        template: name + '.html',
+        inject: true,
+        chunks: [name]
+      });
+      webpackPlugins.push(plugin);
+    }
+  });
 
-  const debug = process.env.NODE_ENV !== 'production';
 
   module.exports = {
-    entry: entries('modules/**/*.js'),
+    entry: webpackEntries,
     output: {
-      path: path.join(__dirname, '..','dist'),
+      path: path.join(__dirname, '..', 'dist'),
       filename: '[name]-[chunkhash].js',
       chunkFilename: '[id]-[chunkhash].js'
     },
-    plugins: [
-      new AssetsPlugin({filename:'dist/rev-mainfest.json'})
-    ],
+    plugins: webpackPlugins,
     resolve: {
       extensions: ['', '.js', '.vue'],
       alias: {

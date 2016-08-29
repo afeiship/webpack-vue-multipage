@@ -8,7 +8,7 @@
     "email": "1290657123@qq.com"
   },
   "scripts": {
-    "build": "rm -rf static && webpack -p --config webpack.config.dist.js"
+    "build": "rm -rf dist && cd src && webpack --config webpack.config.dist.js"
   },
   "license": "MIT",
   "devDependencies": {
