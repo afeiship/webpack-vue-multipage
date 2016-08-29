@@ -1,6 +1,10 @@
 <template lang="html">
   <section class="detail-view">
   Detail views!!!
+
+  <span class="big-icon">
+    <i class="ion ion-grid"></i>
+  </span>
   </section>
 </template>
 
@@ -26,5 +30,8 @@ $detail-color:'#00f';
   color:$detail-color;
   font-size:30px;
   font-weight: bold;
+}
+.big-icon{
+  font-size:100px;
 }
 </style>
