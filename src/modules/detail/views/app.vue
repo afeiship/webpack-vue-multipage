@@ -3,13 +3,12 @@
   Detail views!!!
 
   <span class="big-icon">
-    <i class="ion ion-grid"></i>
+    <i class="ion ion-ios-alarm"></i>
   </span>
   </section>
 </template>
 
 <script>
-import list from 'components/list.vue';
 export default {
   data() {
     return {
@@ -25,6 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 $detail-color:'#00f';
 .detail-view{
   color:$detail-color;
