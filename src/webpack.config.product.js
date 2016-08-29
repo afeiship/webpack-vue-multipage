@@ -13,12 +13,14 @@
       filename: '[name]-[hash:6].js',
       chunkFilename: '[id]-[hash:6].js',
       minify: false,
-      publicPath: '/dist/'
+      publicPath: '/'
     },
     plugins: $.plugins,
     module: $.module,
     vue: $.vue,
-    babel: $.babel
+    babel: $.babel,
+    resolve: $.resolve,
+    devtool: $.devtool
   };
 
 

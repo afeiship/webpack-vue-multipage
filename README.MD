@@ -19,5 +19,5 @@ Vue multipage app based on webpack.
 ##server config:
 + apache:
 ```apache
-DocumentRoot /Users/feizheng/github/webpack-vue-multipage/
+DocumentRoot /Users/feizheng/github/webpack-vue-multipage/dist/
 ```

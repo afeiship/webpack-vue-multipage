@@ -87,6 +87,9 @@
       }, {
         test: /\.(woff|svg|eot|ttf)\??.*$/,
         loader: 'url-loader?limit=8096&name=fonts/[name].[ext]'
+      }, {
+        test: /\.(html|tpl)$/,
+        loader: 'html-loader'
       }]
     },
     vue: {
@@ -99,7 +102,15 @@
     babel: {
       presets: ['es2015'],
       plugins: ['transform-runtime']
-    }
+    },
+    resolve: {
+      extensions: ['', '.js', '.vue'],
+      alias: {
+        components: path.join(__dirname, 'components'),
+        images: path.join(__dirname, 'assets/images')
+      }
+    },
+    devtool: '#source-map'
   };
 
 }());

@@ -1,8 +1,10 @@
 <template lang="html">
 Auth views app start!
+<list></list>
 </template>
 
 <script>
+import list from 'components/list.vue';
 export default {
   data() {
     return {
@@ -12,7 +14,9 @@ export default {
   ready() {},
   attached() {},
   methods: {},
-  components: {}
+  components: {
+    list
+  }
 };
 </script>
 
