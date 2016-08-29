@@ -39,6 +39,15 @@
           ) === 0
         )
       }
+    }),
+    new PurifyCSSPlugin({
+      paths: [
+        'modules/**/*.html'
+      ],
+      purifyOptions: {
+        minify: true,
+        info: true
+      }
     })
   ];
   //init multi page html-webpack-plugin:
@@ -61,7 +70,7 @@
       path: path.join(__dirname, '..', 'dist'),
       filename: '[name]-[hash:6].js',
       chunkFilename: '[id]-[hash:6].js',
-      minify:false,
+      minify: false,
       publicPath: '/dist/'
     },
     plugins: webpackPlugins,
