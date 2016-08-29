@@ -25,23 +25,22 @@
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.NoErrorsPlugin(),
-    // split vendor js into its own file
+    // split vendor js into its own file,
+    new ExtractTextPlugin('[name][hash:5].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function(module, count) {
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&
-          /\.js$/.test(module.resource) &&
+          /\.(js|css|less|scss)$/.test(module.resource) &&
           module.resource.indexOf(
             path.join(__dirname, '../node_modules')
           ) === 0
         )
       }
-    }),
-    new ExtractTextPlugin('styles/main.css')
+    })
   ];
-
   //init multi page html-webpack-plugin:
   Object.keys(webpackEntries).forEach(function(name) {
     if (name.indexOf('index') > -1) {
@@ -60,8 +59,9 @@
     entry: webpackEntries,
     output: {
       path: path.join(__dirname, '..', 'dist'),
-      filename: '[name]-[hash].js',
-      chunkFilename: '[id]-[hash].js',
+      filename: '[name]-[hash:6].js',
+      chunkFilename: '[id]-[hash:6].js',
+      minify:false,
       publicPath: '/dist/'
     },
     plugins: webpackPlugins,
@@ -88,9 +88,6 @@
       }, {
         test: /\.(woff|svg|eot|ttf)\??.*$/,
         loader: 'url-loader?limit=8096&name=fonts/[name].[ext]'
-      }, {
-        test: /\.(html|tpl)$/,
-        loader: 'html-loader'
       }]
     },
     vue: {

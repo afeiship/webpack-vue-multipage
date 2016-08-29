@@ -1,1 +1,0 @@
-webpackJsonp([2],[function(module,exports){"use strict";console.log("home -> index.js")}]);

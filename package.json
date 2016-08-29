@@ -11,6 +11,7 @@
     "build": "rm -rf dist && cd src && webpack --config webpack.config.product.js"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "ionicons": "^3.0.0",
     "vue": "^1.0.10",
     "vue-resource": "^0.9.3"
