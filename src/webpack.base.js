@@ -96,7 +96,7 @@
       loaders: {
         css: ExtractTextPlugin.extract('vue-style-loader', 'css'),
         less: ExtractTextPlugin.extract('vue-style-loader', 'css!less'),
-        sass: ExtractTextPlugin.extract('vue-style-loader', 'css!sass')
+        scss: ExtractTextPlugin.extract('vue-style-loader', 'css!sass')
       }
     },
     babel: {

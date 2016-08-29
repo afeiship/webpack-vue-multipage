@@ -12,9 +12,13 @@ Vue multipage app based on webpack.
 + http://www.tuicool.com/articles/B3QbEni
 + https://zhuanlan.zhihu.com/p/20397902
 + https://blog.pusher.com/exploring-real-time-apps-with-vuejs-es2016-and-webpack/
++ https://scotch.io/tutorials/build-a-single-page-time-tracking-app-with-vue-js-part-ii
+
 
 ##todos:
-- [ ] need yo generator
+- [ ] need yo generator.
+- [ ] hot reload & dev config file.
+
 
 ##server config:
 + apache:
