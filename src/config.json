@@ -1,4 +1,7 @@
 {
-  "production": {},
+  "production": {
+    "pluginsOptions":{
+    }
+  },
   "dev": {}
 }

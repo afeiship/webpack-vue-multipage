@@ -6,23 +6,34 @@
   var entries = require('webpack-entries');
   var config = require('./config.json');
 
-  console.log(config);
-
   //Plugin lists:
   var ExtractTextPlugin = require('extract-text-webpack-plugin');
   var HtmlWebpackPlugin = require('html-webpack-plugin');
   var PurifyCSSPlugin = require('purifycss-webpack-plugin');
   var webpackEntries = entries('modules/**/*.js');
-  var webpackPlugins = [];
+  var webpackPlugins = [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      }),
+      new webpack.NoErrorsPlugin(),
+      // split vendor js into its own file
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: function (module, count) {
+          // any required modules inside node_modules are extracted to vendor
+          return (
+            module.resource &&
+            /\.js$/.test(module.resource) &&
+            module.resource.indexOf(
+              path.join(__dirname, '../node_modules')
+            ) === 0
+          )
+        }
+      })
+  ];
 
-  //init html-webpack-plugin:
+  //init multi page html-webpack-plugin:
   Object.keys(webpackEntries).forEach(function(name) {
-    // console.log(name);
-    // modules/auth/index
-    // modules/detail/index
-    // modules/global
-    // modules/home/index
-    // modules/list/index
     if (name.indexOf('index') > -1) {
       var plugin = new HtmlWebpackPlugin({
         filename: name + '.html',
