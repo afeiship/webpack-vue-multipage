@@ -14,6 +14,7 @@ Vue multipage app based on webpack.
 + https://blog.pusher.com/exploring-real-time-apps-with-vuejs-es2016-and-webpack/
 + https://scotch.io/tutorials/build-a-single-page-time-tracking-app-with-vue-js-part-ii
 + https://webpack.github.io/docs/webpack-dev-server.html
++ http://www.cnblogs.com/pingfan1990/p/5100147.html
 
 ##todos:
 - [ ] need yo generator.
