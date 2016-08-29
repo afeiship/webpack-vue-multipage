@@ -7,11 +7,12 @@
     "name": "afei",
     "email": "1290657123@qq.com"
   },
-  "scripts":{
-    "build":"rm -rf static && webpack -p --config webpack.config.dev.js"
+  "scripts": {
+    "build": "rm -rf static && webpack -p --config webpack.config.dist.js"
   },
   "license": "MIT",
   "devDependencies": {
+    "assets-webpack-plugin": "^3.4.0",
     "autoprefixer-loader": "^2.0.0",
     "babel": "^6.3.13",
     "babel-core": "^6.3.21",
@@ -40,6 +41,8 @@
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.14.0",
+    "webpack-entries": "afeiship/webpack-entries",
+    "webpack-init": "^0.1.1",
     "yargs": "^4.7.1"
   }
 }

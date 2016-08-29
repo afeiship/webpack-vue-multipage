@@ -1,7 +1,0 @@
-{
-  "src/modules/list/index.js": "s",
-  "src/modules/home/index.js": "s",
-  "src/modules/global.js": "s",
-  "src/modules/detail/index.js": "s",
-  "src/modules/auth/index.js": "s"
-}
