@@ -7,11 +7,6 @@
     "name": "afei",
     "email": "1290657123@qq.com"
   },
-  "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && cd src && webpack -p --config webpack.config.product.js",
-    "dev": "npm run clean && cd src && webpack-dev-server --inline --progress --colors --port 8090 --config webpack.config.development.js"
-  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "ionicons": "^3.0.0",
