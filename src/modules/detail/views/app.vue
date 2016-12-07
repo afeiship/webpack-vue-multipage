@@ -1,6 +1,6 @@
 <template lang="html">
   <section class="detail-view">
-  Detail views!!!
+  Detail views abcby fei!!!
 
   <span class="big-icon">
     <i class="ion ion-ios-alarm"></i>

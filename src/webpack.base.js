@@ -8,13 +8,15 @@
   var HtmlWebpackPlugin = require('html-webpack-plugin');
   var PurifyCSSPlugin = require('purifycss-webpack-plugin');
   var webpackEntries = entries('modules/**/*.js');
+  var WebpackMd5Hash = require('webpack-md5-hash');
   var webpackPlugins = [
     new webpack.ProvidePlugin({
       Vue: 'vue'
     }),
     new webpack.NoErrorsPlugin(),
     // split vendor js into its own file,
-    new ExtractTextPlugin('[name][hash:5].css')
+    new ExtractTextPlugin('[name]-[contenthash:5].css'),
+    new WebpackMd5Hash()
   ];
 
   module.exports = {
@@ -75,6 +77,7 @@
     resolve: {
       extensions: ['', '.js', '.vue'],
       alias: {
+        bower: path.join(__dirname, 'bower_components'),
         components: path.join(__dirname, 'components'),
         images: path.join(__dirname, 'assets/images')
       }

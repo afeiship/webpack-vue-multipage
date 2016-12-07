@@ -6,6 +6,8 @@
   var config = require('./config.json');
   var ExtractTextPlugin = require('extract-text-webpack-plugin');
   var PurifyCSSPlugin = require('purifycss-webpack-plugin');
+
+
   var productPlugins = [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
@@ -41,15 +43,15 @@
   ];
 
   $.initMultiHtmlWebpackPlugins();
-  
+
   productPlugins = $.plugins.concat(productPlugins);
 
   module.exports = {
     entry: $.entry,
     output: {
       path: path.join(__dirname, '..', 'dist'),
-      filename: '[name]-[hash:6].js',
-      chunkFilename: '[id]-[hash:6].js',
+      filename: '[name]-[hash:5].js',
+      chunkFilename: '[id]-[hash:5].js',
       minify: false,
       publicPath: '/'
     },

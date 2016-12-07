@@ -15,7 +15,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "ionicons": "^3.0.0",
-    "vue": "^1.0.10",
+    "vue": "^2.0.6",
     "vue-resource": "^0.9.3"
   },
   "license": "MIT",
@@ -52,6 +52,7 @@
     "webpack-entries": "afeiship/webpack-entries",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-init": "^0.1.1",
+    "webpack-md5-hash": "0.0.5",
     "yargs": "^4.7.1"
   }
 }
