@@ -1,10 +1,10 @@
 <template lang="html">
   <section class="detail-view">
-  Detail views abcby fei!!!
+    Detail views abcby fei!!!
 
-  <span class="big-icon">
-    <i class="ion ion-ios-alarm"></i>
-  </span>
+    <span class="big-icon">
+      <i class="ion ion-ios-alarm"></i>
+    </span>
   </section>
 </template>
 

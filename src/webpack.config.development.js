@@ -4,9 +4,7 @@
   var webpack = require('webpack');
   var $ = require('./webpack.base');
   var config = require('./config.json');
-
-  $.initMultiHtmlWebpackPlugins();
-
+  var HtmlWebpackPlugin = require('html-webpack-plugin');
   var hotReloadEntries = {};
   var hotReloadPlugins = [
     new webpack.HotModuleReplacementPlugin(),
@@ -15,10 +13,22 @@
     })
   ];
 
+  Object.keys($.webpackEntries).forEach(function(name) {
+    if (name.indexOf('index') > -1) {
+      var plugin = new HtmlWebpackPlugin({
+        filename: name + '.html',
+        template: name + '.html',
+        inject: true,
+        chunks: [config.venderName, name]
+      });
+      hotReloadPlugins.push(plugin);
+    }
+  });
+
   hotReloadPlugins = hotReloadPlugins.concat($.plugins);
 
   module.exports = {
-    entry: $.entry,
+    entry: $.webpackEntries,
     output: {
       path: path.join(__dirname, '..', 'dist'),
       filename: '[name].js',

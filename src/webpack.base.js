@@ -28,7 +28,8 @@
   }
 
   module.exports = {
-    entry: processedEntries,
+    processedEntries: processedEntries,
+    webpackEntries:webpackEntries,
     plugins: webpackPlugins,
     initMultiHtmlWebpackPlugins: function() {
       Object.keys(webpackEntries).forEach(function(name) {
@@ -37,6 +38,13 @@
             filename: name.slice(8) + '.html',
             template: name + '.html',
             inject: true,
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeAttributeQuotes: true
+              // more options:
+              // https://github.com/kangax/html-minifier#options-quick-reference
+            },
             chunks: [config.venderName, name.slice(8,-6)]
           });
           webpackPlugins.push(plugin);

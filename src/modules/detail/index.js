@@ -14,7 +14,7 @@ console.log(app);
 
 new Vue({
   el:'#detail-app',
-  components: { app }
+  render: h => h(app)
 });
 
 

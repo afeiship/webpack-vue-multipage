@@ -5,12 +5,12 @@ import app from './views/app.vue';
 
 
 Vue.use(VueResource);
-Vue.config.debug = true;
+// Vue.config.debug = true;
 
 console.log(app);
 console.log('Auth page vue app initial!');
 
 new Vue({
   el:'#auth-app',
-  components: { app }
+  render: h => h(app)
 });

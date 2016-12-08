@@ -37,7 +37,7 @@
   productPlugins = $.plugins.concat(productPlugins);
 
   module.exports = {
-    entry: $.entry,
+    entry: $.processedEntries,
     output: {
       path: path.join(__dirname, '..', 'dist'),
       filename: '[name]/index-[hash:5].js',

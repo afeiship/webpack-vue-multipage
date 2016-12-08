@@ -1,12 +1,14 @@
 <template lang="html">
-Auth views app start!
-<br>
-Test by fei auto load!!!
-<br>
-Test again!!!--afei!!!xxx
-<br>
-Very cool!
-<list></list>
+  <section class="auth">
+    Auth views app start!
+    <br>
+    Test by fei auto load!!!
+    <br>
+    Test again!!!--afei!!!xxx
+    <br>
+    Very cool!
+    <list></list>
+  </section>
 </template>
 
 <script>
