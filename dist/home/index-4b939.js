@@ -1,1 +1,0 @@
-webpackJsonp([3],{1:function(e,n){},11:function(e,n,o){e.exports=o.p+"assets/images/bd_logo1_31bdc765.png"},0:function(e,n,o){"use strict";function s(e){return e&&e.__esModule?e:{default:e}}var t=o(2);s(t),o(1);var u=o(11),c=s(u);console.log("home -> index.js",c.default)}});
