@@ -15,21 +15,29 @@
     }),
     new webpack.NoErrorsPlugin(),
     // split vendor js into its own file,
-    new ExtractTextPlugin('[name]-[contenthash:5].css'),
+    new ExtractTextPlugin('[name]/index-[contenthash:5].css'),
     new WebpackMd5Hash()
   ];
 
+  var processedEntries={};
+  for (var key in webpackEntries) {
+    if (webpackEntries.hasOwnProperty(key)) {
+      // remove 'modules' && 'index'
+      processedEntries[key.slice(8,-6)]=webpackEntries[key];
+    }
+  }
+
   module.exports = {
-    entry: webpackEntries,
+    entry: processedEntries,
     plugins: webpackPlugins,
     initMultiHtmlWebpackPlugins: function() {
       Object.keys(webpackEntries).forEach(function(name) {
         if (name.indexOf('index') > -1) {
           var plugin = new HtmlWebpackPlugin({
-            filename: name + '.html',
+            filename: name.slice(8) + '.html',
             template: name + '.html',
             inject: true,
-            chunks: [config.venderName, name]
+            chunks: [config.venderName, name.slice(8,-6)]
           });
           webpackPlugins.push(plugin);
         }
@@ -54,10 +62,10 @@
         loader: ExtractTextPlugin.extract('style', 'css!autoprefixer!sass')
       }, {
         test: /\.(gif|jpg|png)\??.*$/,
-        loader: 'url-loader?limit=8096&name=images/[name].[ext]'
+        loader: 'url-loader?limit=8096&name=assets/images/[name].[ext]'
       }, {
         test: /\.(woff|svg|eot|ttf)\??.*$/,
-        loader: 'url-loader?limit=8096&name=fonts/[name].[ext]'
+        loader: 'url-loader?limit=8096&name=assets/fonts/[name].[ext]'
       }, {
         test: /\.(html|tpl)$/,
         loader: 'html-loader'
@@ -79,7 +87,7 @@
       alias: {
         bower: path.join(__dirname, 'bower_components'),
         components: path.join(__dirname, 'components'),
-        images: path.join(__dirname, 'assets/images')
+        assets: path.join(__dirname, 'assets')
       }
     }
   };

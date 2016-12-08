@@ -19,27 +19,17 @@
       mangle: false
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: config.venderName,
-      minChunks: function(module, count) {
-        // any required modules inside node_modules are extracted to vendor
-        return (
-          module.resource &&
-          /\.(js|css|less|scss)$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, 'node_modules')
-          ) === 0
-        )
-      }
+      name: config.venderName
     }),
-    new PurifyCSSPlugin({
-      paths: [
-        'modules/**/*.html'
-      ],
-      purifyOptions: {
-        minify: true,
-        info: true
-      }
-    })
+    // new PurifyCSSPlugin({
+    //   paths: [
+    //     'modules/**/*.html'
+    //   ],
+    //   purifyOptions: {
+    //     minify: true,
+    //     info: true
+    //   }
+    // })
   ];
 
   $.initMultiHtmlWebpackPlugins();
@@ -50,8 +40,8 @@
     entry: $.entry,
     output: {
       path: path.join(__dirname, '..', 'dist'),
-      filename: '[name]-[hash:5].js',
-      chunkFilename: '[id]-[hash:5].js',
+      filename: '[name]/index-[hash:5].js',
+      chunkFilename: '[name]/index-[hash:5].js',
       minify: false,
       publicPath: '/'
     },

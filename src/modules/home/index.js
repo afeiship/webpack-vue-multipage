@@ -1,2 +1,5 @@
+import Vue from 'vue';
 import 'bootstrap/dist/css/bootstrap.css';
-console.log('home -> index.js');
+import baiduLogo from 'assets/images/bd_logo1_31bdc765.png';
+
+console.log('home -> index.js',baiduLogo);

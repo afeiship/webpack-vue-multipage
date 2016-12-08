@@ -1,1 +1,0 @@
-webpackJsonp([4,0],[function(n,o,c){"use strict";c(1),console.log("home -> index.js")},function(n,o){}]);
