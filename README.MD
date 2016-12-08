@@ -26,7 +26,7 @@ Vue multipage app based on webpack.
   + http://localhost:8080/webpack-dev-server/modules/detail
   + http://localhost:8080/webpack-dev-server/modules/home
   + http://localhost:8080/webpack-dev-server/modules/list
-
+- [x] support vue 2.x
 
 ##build command:
   - scripts:
