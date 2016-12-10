@@ -1,6 +1,5 @@
 'use strict';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'ionicons/dist/css/ionicons.css';
+import 'ionicons/css/ionicons.css';
 
 
 import Vue from 'vue';

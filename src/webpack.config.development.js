@@ -43,7 +43,8 @@
     resolve: $.resolve,
     devtool: '#source-map',
     devServer: {
-      hot: true
+      hot: true,
+      stats: 'errors-only'
     }
   };
 

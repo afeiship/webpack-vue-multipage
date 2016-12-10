@@ -8,11 +8,19 @@
     <br>
     Very cool!
     <list></list>
+    <spinner size="20px" width="2px" />
+
+    <button type="button" name="button" v-on:click="_click()">Click ME Indicator</button>
   </section>
 </template>
 
 <script>
 import list from 'components/list.vue';
+import Spinner from 'vue-spinner';
+import Indicator from 'vue-indicator';
+Vue.use(Indicator);
+
+
 export default {
   data() {
     return {
@@ -21,9 +29,22 @@ export default {
   computed: {},
   ready() {},
   attached() {},
-  methods: {},
+  methods: {
+    _click(){
+      Indicator.open({
+        text:"加载中...",
+        spinOptions:{
+          size:'40px',
+          width:'2px'
+        }
+      });
+      setTimeout(function() {
+        Indicator.close();
+      },1000)
+    }
+  },
   components: {
-    list
+    list,Spinner
   }
 };
 </script>

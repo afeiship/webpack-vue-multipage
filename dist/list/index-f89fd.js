@@ -1,1 +1,0 @@
-webpackJsonp([4],[function(n,e,o){"use strict";function t(n){return n&&n.__esModule?n:{default:n}}var s=o(2);t(s),o(1),console.log("list -> index.js")},function(n,e){}]);

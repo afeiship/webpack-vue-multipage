@@ -4,11 +4,13 @@
 
     <span class="big-icon">
       <i class="ion ion-ios-alarm"></i>
+      <Icon icon="ion-ionic" style="font-size:40px;">
     </span>
   </section>
 </template>
 
 <script>
+import Icon from 'vue-ionicons';
 export default {
   data() {
     return {
@@ -19,6 +21,7 @@ export default {
   attached() {},
   methods: {},
   components: {
+    Icon
   }
 };
 </script>
