@@ -3,8 +3,9 @@
   var path = require('path');
   var webpack = require('webpack');
   var $ = require('./webpack.base');
-  var config = require('./config.json');
+  var config = require('./webpack.config');
   var HtmlWebpackPlugin = require('html-webpack-plugin');
+  var nx = require('next-js-core2');
   var hotReloadEntries = {};
   var hotReloadPlugins = [
     new webpack.HotModuleReplacementPlugin(),
@@ -13,20 +14,21 @@
     })
   ];
 
-  Object.keys($.webpackEntries).forEach(function(name) {
+  nx.each($.webpackEntries,function(name) {
     if (name.indexOf('index') > -1) {
-      var plugin = new HtmlWebpackPlugin({
-        filename: name + '.html',
-        template: name + '.html',
-        inject: true,
-        chunks: [config.venderName, name]
-      });
-      hotReloadPlugins.push(plugin);
+      var plugin = new HtmlWebpackPlugin(
+        nx.mix(config.htmlWebpackOptions,{
+          filename: name+ '.html',
+          template: name + '.html',
+          chunks: [config.vendorName, name]
+        })
+      );
+      $.plugins.push(plugin);
     }
-  });
+  })
 
   hotReloadPlugins = hotReloadPlugins.concat($.plugins);
-
+  
   module.exports = {
     entry: $.webpackEntries,
     output: {

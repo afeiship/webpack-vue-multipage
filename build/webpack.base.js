@@ -1,56 +1,33 @@
 (function() {
 
-  var config = require('./config.json');
+  var config = require('./webpack.config');
   var path = require('path');
   var webpack = require('webpack');
   var entries = require('webpack-entries');
   var ExtractTextPlugin = require('extract-text-webpack-plugin');
-  var HtmlWebpackPlugin = require('html-webpack-plugin');
   var PurifyCSSPlugin = require('purifycss-webpack-plugin');
-  var webpackEntries = entries('modules/**/*.js');
-  var WebpackMd5Hash = require('webpack-md5-hash');
+  var webpackEntries = entries('src/modules/**/index.js');
   var webpackPlugins = [
     new webpack.ProvidePlugin({
       Vue: 'vue'
     }),
     new webpack.NoErrorsPlugin(),
     // split vendor js into its own file,
-    new ExtractTextPlugin('[name]/index-[contenthash:5].css'),
-    new WebpackMd5Hash()
+    new ExtractTextPlugin('[name]/index-[contenthash:5].css')
   ];
 
-  var processedEntries={};
+  var processedEntries = {};
+
   for (var key in webpackEntries) {
     if (webpackEntries.hasOwnProperty(key)) {
-      // remove 'modules' && 'index'
-      processedEntries[key.slice(8,-6)]=webpackEntries[key];
+      processedEntries[key.slice(12)] = webpackEntries[key];
     }
   }
 
   module.exports = {
+    webpackEntries: webpackEntries,
     processedEntries: processedEntries,
-    webpackEntries:webpackEntries,
     plugins: webpackPlugins,
-    initMultiHtmlWebpackPlugins: function() {
-      Object.keys(webpackEntries).forEach(function(name) {
-        if (name.indexOf('index') > -1) {
-          var plugin = new HtmlWebpackPlugin({
-            filename: name.slice(8) + '.html',
-            template: name + '.html',
-            inject: true,
-            minify: {
-              removeComments: true,
-              collapseWhitespace: true,
-              removeAttributeQuotes: true
-              // more options:
-              // https://github.com/kangax/html-minifier#options-quick-reference
-            },
-            chunks: [config.venderName, name.slice(8,-6)]
-          });
-          webpackPlugins.push(plugin);
-        }
-      });
-    },
     module: {
       loaders: [{
         test: /\.vue$/,
@@ -76,7 +53,7 @@
         loader: 'url-loader?limit=8096&name=assets/fonts/[name].[ext]'
       }, {
         test: /\.(html|tpl)$/,
-        loader: 'html-loader'
+        loader: 'html-loader?minimize=false'
       }]
     },
     vue: {
@@ -93,9 +70,12 @@
     resolve: {
       extensions: ['', '.js', '.vue'],
       alias: {
-        bower: path.join(__dirname, 'bower_components'),
-        components: path.join(__dirname, 'components'),
-        assets: path.join(__dirname, 'assets')
+        vue: 'vue/dist/vue.js',
+        node_modules: path.join(__dirname, '../node_modules'),
+        bower: path.join(__dirname, '../bower_components'),
+        components: path.join(__dirname, '../src/components'),
+        modules: path.join(__dirname, '../src/modules'),
+        assets: path.join(__dirname, '../src/assets'),
       }
     }
   };

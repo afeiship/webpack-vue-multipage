@@ -4,16 +4,17 @@ import 'ionicons/css/ionicons.css';
 
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-import app from './views/app.vue';
+import App from './views/app.vue';
 
 Vue.use(VueResource);
 Vue.config.debug = true;
 
-console.log(app);
+console.log(App);
 
 new Vue({
   el:'#detail-app',
-  render: h => h(app)
+  template: '<App/>',
+  components: { App }
 });
 
 
