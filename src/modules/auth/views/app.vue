@@ -6,7 +6,7 @@
     <br>
     Test again!!!--afei!!!xxx
     <br>
-    Very cool!
+    Very cool ==fei!
     <list></list>
     <!-- <spinner size="20px" width="2px" /> -->
 
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import list from 'components/list.vue';
+import List from 'components/list.vue';
 // import Spinner from 'vue-spinner';
 // import Indicator from 'vue-indicator';
 // Vue.use(Indicator);
@@ -44,7 +44,7 @@ export default {
     }
   },
   components: {
-    // list,Spinner
+    List
   }
 };
 </script>

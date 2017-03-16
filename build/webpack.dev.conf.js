@@ -28,7 +28,7 @@
   })
 
   hotReloadPlugins = hotReloadPlugins.concat($.plugins);
-  
+
   module.exports = {
     entry: $.webpackEntries,
     output: {
@@ -46,6 +46,7 @@
     devtool: '#source-map',
     devServer: {
       hot: true,
+      inline:true,
       stats: 'errors-only'
     }
   };
