@@ -1,8 +1,8 @@
-#webpack-vue-multipage
+# webpack-vue-multipage
 Vue multipage app based on webpack.
 
 
-#resources:
+## resources:
 + http://webpack.github.io/docs/multiple-entry-points.html
 + http://www.cnblogs.com/rubylouvre/p/5158923.html
 + https://github.com/alexanderGugel/ied
@@ -20,7 +20,7 @@ Vue multipage app based on webpack.
 + http://stackoverflow.com/questions/37031123/why-am-i-not-being-able-to-compile-sass-with-webpack
 
 
-##todos:
+## todos:
 - [ ] need yo generator.
 - [x] hot reload & dev config file.
   + http://localhost:8080/webpack-dev-server/modules/auth
@@ -29,7 +29,7 @@ Vue multipage app based on webpack.
   + http://localhost:8080/webpack-dev-server/modules/list
 - [x] support vue 2.x
 
-##build command:
+## build command:
   - scripts:
   ```json
   {
@@ -47,7 +47,7 @@ Vue multipage app based on webpack.
   ```
 
 
-##server config:
+## server config:
 + apache:
 ```apache
 DocumentRoot /Users/feizheng/github/webpack-vue-multipage/dist/
