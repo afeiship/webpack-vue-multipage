@@ -1,6 +1,7 @@
-node_modules
-bower_components
-coverage
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+package-lock.json
 .idea
-dist
-
