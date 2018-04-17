@@ -10,3 +10,6 @@ npm run dev
 ## resources:
 + github:/Plortinus/vue-multiple-pages
 
+## todos:
++ optimize webapck scripts
++ next/next-package/next-class intergrete

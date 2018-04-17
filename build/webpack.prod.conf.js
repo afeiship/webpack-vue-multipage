@@ -8,6 +8,6 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new OptimizeCSSPlugin()
   ]
-})
+});
 
-module.exports = prodWebpackConfig
+module.exports = prodWebpackConfig;

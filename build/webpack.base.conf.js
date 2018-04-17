@@ -1,62 +1,72 @@
 'use strict'
 
-const { join, resolve } = require('path')
-const webpack = require('webpack')
-const glob = require('glob')
+const { join, resolve } = require('path');
+const webpack = require('webpack');
+const glob = require('glob');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const bundleConfig = require("../dist/vendors/bundle-config.json");
+
+
+console.log(bundleConfig);
 
 const extractCSS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
   allChunks: true
-})
+});
+
 const extractSASS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
   allChunks: true
-})
+});
 
-const entries = {}
-const chunks = []
-const htmlWebpackPluginArray = []
+const entries = {};
+const chunks = [];
+const htmlWebpackPluginArray = [];
 glob.sync('./src/pages/**/app.js').forEach(path => {
   const chunk = path.split('./src/pages/')[1].split('/app.js')[0]
-  entries[chunk] = path
-  chunks.push(chunk)
+  entries[chunk] = path;
+  chunks.push(chunk);
 
-  const filename = chunk + '.html'
+  const filename = chunk + '.html';
   const htmlConf = {
     filename: filename,
-    template: path.replace(/.js/g, '.html'),
+    template: path.replace(/.js/g, '.ejs'),
     inject: 'body',
     favicon: './src/assets/images/logo.png',
+    libJs: bundleConfig.libs.js,
+    libCss: bundleConfig.libs.css,
     hash: true,
     chunks: ['commons', chunk]
-  }
-  htmlWebpackPluginArray.push(new HtmlWebpackPlugin(htmlConf))
-})
+  };
+  htmlWebpackPluginArray.push(new HtmlWebpackPlugin(htmlConf));
+});
 
 const styleLoaderOptions = {
   loader: 'style-loader',
   options: {
     sourceMap: true
   }
-}
+};
+
 const cssOptions = [
   { loader: 'css-loader', options: { sourceMap: true } },
   { loader: 'postcss-loader', options: { sourceMap: true } }
-]
+];
+
 const sassOptions = [...cssOptions, {
   loader: 'sass-loader',
   options: {
     sourceMap: true
   }
-}]
+}];
+
 const config = {
   entry: entries,
   output: {
     path: resolve(__dirname, '../dist'),
-    filename: 'assets/js/[name].js',
+    filename: 'assets/scripts/[name].js',
     publicPath: '/'
   },
   resolve: {
@@ -124,7 +134,7 @@ const config = {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: 'assets/images/[name].[hash:7].[ext]'
+            name: 'assets/fonts/[name].[hash:7].[ext]'
           }
         }]
       }
@@ -148,8 +158,21 @@ const config = {
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
     extractSASS,
-    extractCSS
+    extractCSS,
+    new webpack.ProvidePlugin({
+      Vue: 'vue',
+      nx: 'next-js-core2'
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('../dist/vendors/libs-mainfest.json') // 指向生成的manifest.json
+    })
   ]
-}
-config.plugins = [...config.plugins, ...htmlWebpackPluginArray]
-module.exports = config
+};
+
+config.plugins = [
+  ...config.plugins,
+  ...htmlWebpackPluginArray
+];
+
+module.exports = config;
