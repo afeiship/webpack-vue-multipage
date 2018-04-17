@@ -18,7 +18,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       }
     },
     open: true,
-    openPage: 'user/login.html'
+    openPage: 'home.html'
   }
 })
 

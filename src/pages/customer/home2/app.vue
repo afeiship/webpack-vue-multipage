@@ -5,12 +5,12 @@
     </div>
     <img v-bind:src="logoImg">
     <h1></h1>
-    <el-button @click.native="startHacking">Let's do it</el-button>
+    <button @click.native="startHacking">Let's do it</button>
   </div>
 </template>
 
 <script>
-import logo from 'assets/img/logo.png'
+import logo from 'assets/images/logo.png'
 export default {
   data () {
     return {

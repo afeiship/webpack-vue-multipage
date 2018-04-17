@@ -8,11 +8,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const extractCSS = new ExtractTextPlugin({
-  filename: 'assets/css/[name].css',
+  filename: 'assets/styles/[name].css',
   allChunks: true
 })
 const extractSASS = new ExtractTextPlugin({
-  filename: 'assets/css/[name].css',
+  filename: 'assets/styles/[name].css',
   allChunks: true
 })
 
@@ -29,7 +29,7 @@ glob.sync('./src/pages/**/app.js').forEach(path => {
     filename: filename,
     template: path.replace(/.js/g, '.html'),
     inject: 'body',
-    favicon: './src/assets/img/logo.png',
+    favicon: './src/assets/images/logo.png',
     hash: true,
     chunks: ['commons', chunk]
   }
@@ -124,7 +124,7 @@ const config = {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: 'assets/img/[name].[hash:7].[ext]'
+            name: 'assets/images/[name].[hash:7].[ext]'
           }
         }]
       }
