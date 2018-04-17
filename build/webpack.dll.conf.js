@@ -31,19 +31,19 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, '../dist/vendors'),
+    path: path.resolve(__dirname, '../dist/assets/vendors'),
     filename: '[name].[chunkhash:7].js',
     library: '[name]_library'
   },
   plugins: [
     new webpack.DllPlugin({
-      path: path.resolve(__dirname, '../dist/vendors/[name]-mainfest.json'),
+      path: path.resolve(__dirname, '../dist/assets/vendors/[name]-mainfest.json'),
       name: '[name]_library',
       context: __dirname // 执行的上下文环境，对之后DllReferencePlugin有用
     }),
     new ExtractTextPlugin('[name].[chunkhash:7].css'),
     new AssetsPlugin({
-      filename: '../dist/vendors/bundle-config.json',
+      filename: '../dist/assets/vendors/bundle-config.json',
       path: './vendors'
     }),
   ],

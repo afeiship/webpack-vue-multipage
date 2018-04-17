@@ -6,11 +6,9 @@ const glob = require('glob');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const bundleConfig = require("../dist/vendors/bundle-config.json");
-
-
-console.log(bundleConfig);
-
+const bundleConfig = require("../dist/assets/vendors/bundle-config.json");
+const argv = require('yargs').argv;
+const argEnv = argv.env || 'dev';
 const extractCSS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
   allChunks: true
@@ -25,18 +23,18 @@ const entries = {};
 const chunks = [];
 const htmlWebpackPluginArray = [];
 glob.sync('./src/pages/**/app.js').forEach(path => {
-  const chunk = path.split('./src/pages/')[1].split('/app.js')[0]
+  const chunk = path.split('./src/pages/')[1].split('/app.js')[0];
   entries[chunk] = path;
   chunks.push(chunk);
-
   const filename = chunk + '.html';
+  const basePath = argEnv === 'dev' ? '/dist/assets/vendors/' : '/assets/vendors/';
   const htmlConf = {
     filename: filename,
     template: path.replace(/.js/g, '.ejs'),
     inject: 'body',
     favicon: './src/assets/images/logo.png',
-    libJs: bundleConfig.libs.js,
-    libCss: bundleConfig.libs.css,
+    libJs: [basePath, bundleConfig.libs.js].join(''),
+    libCss: [basePath, bundleConfig.libs.css].join(''),
     hash: true,
     chunks: ['commons', chunk]
   };
@@ -61,6 +59,10 @@ const sassOptions = [...cssOptions, {
     sourceMap: true
   }
 }];
+
+
+console.log(entries);
+
 
 const config = {
   entry: entries,
@@ -165,7 +167,7 @@ const config = {
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('../dist/vendors/libs-mainfest.json') // 指向生成的manifest.json
+      manifest: require('../dist/assets/vendors/libs-mainfest.json') // 指向生成的manifest.json
     })
   ]
 };
