@@ -15,3 +15,4 @@ npm run dev
 + [ ] next/next-package/next-class intergrete
 + [ ] optimize env
 + [ ] import file/*.scss
++ [ ] module configuration
