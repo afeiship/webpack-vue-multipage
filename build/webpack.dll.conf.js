@@ -27,7 +27,7 @@ module.exports = {
     libs: [
       'vue',
       'next-js-core2',
-      path.resolve(__dirname, '../src/assets/styles/index.scss')
+      path.resolve(__dirname, '../src/assets/styles/libs.scss')
     ]
   },
   output: {
