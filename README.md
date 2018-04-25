@@ -12,7 +12,7 @@ npm run dev
 
 ## todos:
 + [ ] optimize webapck scripts
-+ [ ] next/next-package/next-class intergrete
++ [x] next/next-package/next-class intergrete
 + [ ] optimize env
 + [ ] import file/*.scss
 + [ ] module configuration

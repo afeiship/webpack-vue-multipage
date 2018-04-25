@@ -55,6 +55,7 @@
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1",
+    "webpack-entries": "github:afeiship/webpack-entries",
     "webpack-merge": "^4.1.2",
     "yargs": "^11.0.0"
   }
