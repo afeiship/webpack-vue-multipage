@@ -61,7 +61,7 @@ const sassOptions = [...cssOptions, {
 }];
 
 
-console.log(entries);
+// console.log(entries);
 
 
 const config = {
