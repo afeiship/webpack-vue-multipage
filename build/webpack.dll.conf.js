@@ -44,7 +44,7 @@ module.exports = {
     new ExtractTextPlugin('[name].[chunkhash:7].css'),
     new AssetsPlugin({
       filename: '../dist/assets/vendors/bundle-config.json',
-      path: './vendors'
+      path: './dist'
     }),
   ],
   module: {
