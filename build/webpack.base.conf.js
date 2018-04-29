@@ -13,6 +13,7 @@ const extractCSS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
   allChunks: true
 });
+const CSS_HOT_LOADER = ['css-hot-loader'];
 
 const extractSASS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
@@ -22,6 +23,7 @@ const extractSASS = new ExtractTextPlugin({
 const entries = {};
 const chunks = [];
 const htmlWebpackPluginArray = [];
+
 glob.sync('./src/pages/**/app.js').forEach(path => {
   const chunk = path.split('./src/pages/')[1].split('/app.js')[0];
   entries[chunk] = path;
@@ -61,9 +63,6 @@ const sassOptions = [...cssOptions, {
 }];
 
 
-// console.log(entries);
-
-
 const config = {
   entry: entries,
   output: {
@@ -85,15 +84,15 @@ const config = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+            css: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
               use: cssOptions,
               fallback: styleLoaderOptions
             })),
-            scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+            scss: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
               use: sassOptions,
               fallback: styleLoaderOptions
             })),
-            postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+            postcss: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
               use: cssOptions,
               fallback: styleLoaderOptions
             }))
@@ -107,14 +106,14 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+        use: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
           use: cssOptions,
           fallback: styleLoaderOptions
         }))
       },
       {
         test: /\.scss$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+        use: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
           use: sassOptions,
           fallback: styleLoaderOptions
         }))
