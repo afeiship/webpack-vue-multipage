@@ -17,3 +17,4 @@ npm run dev
 + [ ] optimize env
 + [ ] docker/docker-compose local develop
 + [ ] module configuration
++ [ ] docker / docker-compose migrate
