@@ -13,7 +13,7 @@ npm run dev
 ## todos:
 + [ ] optimize webapck scripts
 + [x] next/next-package/next-class intergrete
++ [x] import file/*.scss
 + [ ] optimize env
-+ [ ] import file/*.scss
 + [ ] docker/docker-compose local develop
 + [ ] module configuration
