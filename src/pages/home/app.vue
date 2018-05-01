@@ -1,10 +1,14 @@
 <template>
-  <div id="home-view">
+  <div id="home-view" style="auto wp-7">
     <div class="dd">
       Home
     </div>
     <img v-bind:src="logoImg" class="wp-2 auto logo">
-    <h1 class="blank-10"></h1>
+    <header>
+      <p style="color:#000; padding: 20px; border:1px dashed #ccc;">Import by views/*.scss</p>
+      <h1>H1 title (I am styled by views/test1.scss)</h1>
+      <h2>H2 title (I am styled by views/test2.scss)</h2>
+    </header>
     <button @click.native="startHacking">Let's do it</button>
   </div>
 </template>
@@ -36,7 +40,6 @@ export default {
     background-color: #f5f5f5;
   }
   :root h1 {
-   --color: red;
    display: flex;
    color: var(--color);
   }

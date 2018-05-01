@@ -3,6 +3,8 @@
 @import 'node_modules/webkit-sass-mixins/dist/webkit-sass-mixins.scss';
 @import 'node_modules/webkit-sass-generators/dist/webkit-sass-generators.scss';
 
+@import './views/*.scss';
+
 body{
   background: #fee;
   color: #fff;

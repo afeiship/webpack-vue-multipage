@@ -113,6 +113,11 @@ const config = {
       },
       {
         test: /\.scss$/,
+        loader: 'import-glob-loader',
+        enforce: "pre"
+      },
+      {
+        test: /\.scss$/,
         use: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
           use: sassOptions,
           fallback: styleLoaderOptions
