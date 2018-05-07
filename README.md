@@ -18,3 +18,4 @@ npm run dev
 + [ ] docker/docker-compose local develop
 + [ ] module configuration
 + [ ] docker / docker-compose migrate
++ [ ] only Update single module/ how to publish?[All/OR the module?]
