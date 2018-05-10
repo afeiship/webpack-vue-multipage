@@ -1,10 +1,20 @@
 {
   "dev": {
-    "port": 80,
-    "libs": {}
+    "port": 8080,
+    "basePath": "/dist/assets/vendors/",
+    "publicPath": "/",
+    "sass": {
+      "sourceMap": true,
+      "outputStyle": "expanded"
+    }
   },
   "prd": {
-    "port": 8010,
-    "libs": {}
+    "port": 9080,
+    "basePath": "/my-project/assets/vendors/",
+    "publicPath": "/my-project/",
+    "sass": {
+      "sourceMap": false,
+      "outputStyle": "compressed"
+    }
   }
 }
