@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
-    "predev": "npm run clean && webpack --mode development --progress --config build/webpack.dll.conf.js",
-    "prebuild": "npm run clean && webpack --mode production --progress --config build/webpack.dll.conf.js",
+    "predev": "npm run clean && webpack --mode development --progress --config build/webpack.dll.conf.js --env=dev",
+    "prebuild": "npm run clean && webpack --mode production --progress --config build/webpack.dll.conf.js --env=prd",
     "dev": "webpack-dev-server --inline --hot --config build/webpack.dev.conf.js --env=dev",
     "build": "webpack --mode production --progress --config build/webpack.prod.conf.js --env=prd"
   },

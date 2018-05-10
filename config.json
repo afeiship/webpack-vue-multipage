@@ -1,10 +1,10 @@
 {
-  "production": {
-    "port": 8010,
+  "dev": {
+    "port": 80,
     "libs": {}
   },
-  "development": {
-    "port": 80,
+  "prd": {
+    "port": 8010,
     "libs": {}
   }
 }

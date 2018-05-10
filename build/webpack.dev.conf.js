@@ -1,6 +1,7 @@
-'use strict'
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
+'use strict';
+
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
@@ -20,6 +21,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     open: true,
     openPage: 'home.html'
   }
-})
+});
 
-module.exports = devWebpackConfig
+module.exports = devWebpackConfig;

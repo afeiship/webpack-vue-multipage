@@ -1,7 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin'); // 提取css
-var AssetsPlugin = require('assets-webpack-plugin'); // 生成文件名，配合HtmlWebpackPlugin增加打包后dll的缓存
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 提取css
+const AssetsPlugin = require('assets-webpack-plugin'); // 生成文件名，配合HtmlWebpackPlugin增加打包后dll的缓存
 const styleLoaderOptions = {
   loader: 'style-loader',
   options: {
@@ -81,4 +81,4 @@ module.exports = {
       },
     ]
   },
-}
+};
