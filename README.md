@@ -11,11 +11,9 @@ npm run dev
 + github:/Plortinus/vue-multiple-pages
 
 ## todos:
-+ [ ] optimize webapck scripts
++ [ ] optimize webpack scripts
 + [x] next/next-package/next-class intergrete
 + [x] import file/*.scss
++ [x] docker / docker-compose migrate
 + [ ] optimize env
-+ [ ] docker/docker-compose local develop
 + [ ] module configuration
-+ [ ] docker / docker-compose migrate
-+ [ ] only Update single module/ how to publish?[All/OR the module?]
