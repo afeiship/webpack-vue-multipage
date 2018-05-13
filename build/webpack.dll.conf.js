@@ -27,7 +27,6 @@ const sassOptions = [...cssOptions, {
 module.exports = {
   entry: {
     libs: [
-      'vue',
       'next-js-core2',
       path.resolve(__dirname, '../src/assets/styles/libs.scss')
     ]

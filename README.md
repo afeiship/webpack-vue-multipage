@@ -11,9 +11,10 @@ npm run dev
 + github:/Plortinus/vue-multiple-pages
 
 ## todos:
-+ [ ] optimize webpack scripts
++ [x] vue to bootcdn
 + [x] next/next-package/next-class intergrete
 + [x] import file/*.scss
 + [x] docker / docker-compose migrate
++ [ ] optimize webpack scripts
 + [ ] optimize env
 + [ ] module configuration
