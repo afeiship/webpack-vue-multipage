@@ -9,6 +9,7 @@
             <h1>H1 title (I am styled by views/test1.scss)</h1>
             <h2>H2 title (I am styled by views/test2.scss)</h2>
         </header>
+        <button @click="click1">Test Click</button>
         <button @click.native="startHacking">Let's do it</button>
     </div>
 </template>
@@ -31,6 +32,9 @@
           message: 'We have laid the groundwork for you. Now it\'s your time to build something epic!',
           duration: 6000
         })
+      },
+      click1(){
+        console.log('click!');
       }
     }
   }
@@ -45,5 +49,16 @@
     :root h1 {
         display: flex;
         color: var(--color);
+    }
+    
+    button{
+        border: none;
+        outline: none;
+        display: block;
+        width:100%;
+        padding: 10px;
+        color:#fff;
+        margin-bottom: 10px;
+        background: #4cd964;
     }
 </style>

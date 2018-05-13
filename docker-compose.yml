@@ -1,0 +1,9 @@
+version: "3"
+services:
+    web:
+      image: nginx
+      volumes:
+        - ./deploy/nginx/conf.d:/etc/nginx/conf.d
+        - ./dist:/www/zb-activity
+      ports:
+        - "9080:80"

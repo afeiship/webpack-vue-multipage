@@ -1,6 +1,6 @@
 'use strict';
 
-const { join, resolve } = require('path');
+const {join, resolve} = require('path');
 const webpack = require('webpack');
 const glob = require('glob');
 
@@ -8,12 +8,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const bundleConfig = require("../dist/assets/vendors/bundle-config.json");
 const argv = require('yargs').argv;
+const cfg = require('../config');
 const argEnv = argv.env || 'dev';
 const extractCSS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
   allChunks: true
 });
-const CSS_HOT_LOADER = ['css-hot-loader'];
 
 const extractSASS = new ExtractTextPlugin({
   filename: 'assets/styles/[name].css',
@@ -23,18 +23,17 @@ const extractSASS = new ExtractTextPlugin({
 const entries = {};
 const chunks = [];
 const htmlWebpackPluginArray = [];
-
 glob.sync('./src/pages/**/app.js').forEach(path => {
   const chunk = path.split('./src/pages/')[1].split('/app.js')[0];
   entries[chunk] = path;
   chunks.push(chunk);
   const filename = chunk + '.html';
-  const basePath = argEnv === 'dev' ? '/dist/assets/vendors/' : '/assets/vendors/';
+  const basePath = cfg[argEnv].basePath;
   const htmlConf = {
     filename: filename,
     template: path.replace(/.js/g, '.ejs'),
     inject: 'body',
-    favicon: './src/assets/images/logo.png',
+    // favicon: './src/assets/images/logo.png',
     libJs: [basePath, bundleConfig.libs.js].join(''),
     libCss: [basePath, bundleConfig.libs.css].join(''),
     hash: true,
@@ -51,16 +50,15 @@ const styleLoaderOptions = {
 };
 
 const cssOptions = [
-  { loader: 'css-loader', options: { sourceMap: true } },
-  { loader: 'postcss-loader', options: { sourceMap: true } }
+  {loader: 'css-loader', options: {sourceMap: true}},
+  {loader: 'postcss-loader', options: {sourceMap: true}}
 ];
 
 const sassOptions = [...cssOptions, {
   loader: 'sass-loader',
-  options: {
-    sourceMap: true
-  }
+  options: cfg[argEnv].sass
 }];
+
 
 
 const config = {
@@ -68,13 +66,14 @@ const config = {
   output: {
     path: resolve(__dirname, '../dist'),
     filename: 'assets/scripts/[name].js',
-    publicPath: '/'
+    publicPath: cfg[argEnv].publicPath
   },
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
       assets: join(__dirname, '../src/assets'),
-      components: join(__dirname, '../src/components')
+      components: join(__dirname, '../src/components'),
+      images: join(__dirname, '../src/assets/images')
     }
   },
   module: {
@@ -84,15 +83,15 @@ const config = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            css: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
+            css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
               use: cssOptions,
               fallback: styleLoaderOptions
             })),
-            scss: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
+            scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
               use: sassOptions,
               fallback: styleLoaderOptions
             })),
-            postcss: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
+            postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
               use: cssOptions,
               fallback: styleLoaderOptions
             }))
@@ -106,7 +105,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           use: cssOptions,
           fallback: styleLoaderOptions
         }))
@@ -118,7 +117,7 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           use: sassOptions,
           fallback: styleLoaderOptions
         }))
@@ -134,7 +133,7 @@ const config = {
         }]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz|mp4|mp3)(\?.+)?$/,
         exclude: /favicon\.png$/,
         use: [{
           loader: 'url-loader',

@@ -2,12 +2,14 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 提取css
 const AssetsPlugin = require('assets-webpack-plugin'); // 生成文件名，配合HtmlWebpackPlugin增加打包后dll的缓存
-const CSS_HOT_LOADER = ['css-hot-loader'];
+const argv = require('yargs').argv;
+const cfg = require('../config');
+const argEnv = argv.env || 'dev';
+
+
 const styleLoaderOptions = {
   loader: 'style-loader',
-  options: {
-    sourceMap: true
-  }
+  options: { sourceMap: true }
 };
 
 const cssOptions = [
@@ -18,10 +20,9 @@ const cssOptions = [
 
 const sassOptions = [...cssOptions, {
   loader: 'sass-loader',
-  options: {
-    sourceMap: true
-  }
+  options: cfg[argEnv].sass
 }];
+
 
 module.exports = {
   entry: {
@@ -45,7 +46,7 @@ module.exports = {
     new ExtractTextPlugin('[name].[chunkhash:7].css'),
     new AssetsPlugin({
       filename: '../dist/assets/vendors/bundle-config.json',
-      path: './dist'
+      path: './vendors'
     }),
   ],
   module: {
@@ -62,7 +63,7 @@ module.exports = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: 'images/[name].[hash:7].[ext]'
+          name: 'img/[name].[hash:7].[ext]'
         }
       },
       {
@@ -75,7 +76,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: CSS_HOT_LOADER.concat(ExtractTextPlugin.extract({
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           use: sassOptions,
           fallback: styleLoaderOptions
         }))
