@@ -2,71 +2,16 @@
 
 const {join, resolve} = require('path');
 const webpack = require('webpack');
-const glob = require('glob');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const bundleConfig = require("../dist/assets/vendors/bundle-config.json");
-const argv = require('yargs').argv;
-const cfg = require('../config');
-const argEnv = argv.env || 'dev';
-const extractCSS = new ExtractTextPlugin({
-  filename: 'assets/styles/[name].css',
-  allChunks: true
-});
+const {initEntries, config, argEnv, cssLoader, sassLoader, postcssLoader} = require('./base.config');
+const {entries, htmlWebpackPluginArray,} = initEntries();
 
-const extractSASS = new ExtractTextPlugin({
-  filename: 'assets/styles/[name].css',
-  allChunks: true
-});
-
-const entries = {};
-const chunks = [];
-const htmlWebpackPluginArray = [];
-glob.sync('./src/pages/**/app.js').forEach(path => {
-  const chunk = path.split('./src/pages/')[1].split('/app.js')[0];
-  entries[chunk] = path;
-  chunks.push(chunk);
-  const filename = chunk + '.html';
-  const basePath = cfg[argEnv].publicPath + 'assets/vendors/';
-  const htmlConf = {
-    filename: filename,
-    template: path.replace(/.js/g, '.ejs'),
-    inject: 'body',
-    favicon: './src/assets/images/logo.png',
-    libJs: [basePath, bundleConfig.libs.js].join(''),
-    libCss: [basePath, bundleConfig.libs.css].join(''),
-    libs: cfg[argEnv].libs,
-    hash: true,
-    chunks: ['commons', chunk]
-  };
-  htmlWebpackPluginArray.push(new HtmlWebpackPlugin(htmlConf));
-});
-
-const styleLoaderOptions = {
-  loader: 'style-loader',
-  options: {
-    sourceMap: true
-  }
-};
-
-const cssOptions = [
-  {loader: 'css-loader', options: {sourceMap: true}},
-  {loader: 'postcss-loader', options: {sourceMap: true}}
-];
-
-const sassOptions = [...cssOptions, {
-  loader: 'sass-loader',
-  options: cfg[argEnv].sass
-}];
-
-
-const config = {
+module.exports = {
   entry: entries,
   output: {
     path: resolve(__dirname, '../dist'),
     filename: 'assets/scripts/[name].js',
-    publicPath: cfg[argEnv].publicPath
+    publicPath: config[argEnv].publicPath
   },
   resolve: {
     extensions: ['.js', '.vue'],
@@ -83,18 +28,24 @@ const config = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-              use: cssOptions,
-              fallback: styleLoaderOptions
-            })),
-            scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-              use: sassOptions,
-              fallback: styleLoaderOptions
-            })),
-            postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-              use: cssOptions,
-              fallback: styleLoaderOptions
-            }))
+            css: ['css-hot-loader'].concat(
+              ExtractTextPlugin.extract({
+                use: [cssLoader, postcssLoader],
+                fallback: 'style-loader'
+              })
+            ),
+            scss: ['css-hot-loader'].concat(
+              ExtractTextPlugin.extract({
+                use: [cssLoader, postcssLoader, sassLoader],
+                fallback: 'style-loader'
+              })
+            ),
+            postcss: ['css-hot-loader'].concat(
+              ExtractTextPlugin.extract({
+                use: [cssLoader, postcssLoader],
+                fallback: 'style-loader'
+              })
+            )
           }
         }
       },
@@ -105,10 +56,10 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          use: cssOptions,
-          fallback: styleLoaderOptions
-        }))
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-hot-loader', 'css-loader', 'postcss-loader']
+        })
       },
       {
         test: /\.scss$/,
@@ -117,10 +68,10 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          use: sassOptions,
-          fallback: styleLoaderOptions
-        }))
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-hot-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+        })
       },
       {
         test: /\.html$/,
@@ -162,22 +113,12 @@ const config = {
   },
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    extractSASS,
-    extractCSS,
-    new webpack.ProvidePlugin({
-      Vue: 'vue',
-      nx: 'next-js-core2'
-    }),
+    new ExtractTextPlugin(config.plugins.extractText),
+    new webpack.ProvidePlugin(config.plugins.provide),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('../dist/assets/vendors/libs-mainfest.json') // 指向生成的manifest.json
-    })
+    }),
+    ...htmlWebpackPluginArray
   ]
 };
-
-config.plugins = [
-  ...config.plugins,
-  ...htmlWebpackPluginArray
-];
-
-module.exports = config;

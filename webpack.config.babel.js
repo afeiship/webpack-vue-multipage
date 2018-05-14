@@ -1,3 +1,3 @@
-export default (env) => {
-  return require(`./build/webpack.config.${env}.babel.js`);
+module.exports = (env) => {
+  return require(`./build/webpack.${env}.conf.js`);
 };

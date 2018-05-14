@@ -42,7 +42,7 @@
 
 <style lang="postcss">
     body {
-        background-color: #f5f5f5;
+        background-color: #f4f4f4;
         padding: 20px;
     }
 

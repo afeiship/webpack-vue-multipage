@@ -2,26 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 提取css
 const AssetsPlugin = require('assets-webpack-plugin'); // 生成文件名，配合HtmlWebpackPlugin增加打包后dll的缓存
-const argv = require('yargs').argv;
-const cfg = require('../config');
-const argEnv = argv.env || 'dev';
-
-
-const styleLoaderOptions = {
-  loader: 'style-loader',
-  options: { sourceMap: true }
-};
-
-const cssOptions = [
-  { loader: 'css-loader', options: { sourceMap: true } },
-  { loader: 'postcss-loader', options: { sourceMap: true } }
-];
-
-
-const sassOptions = [...cssOptions, {
-  loader: 'sass-loader',
-  options: cfg[argEnv].sass
-}];
+const {config, argEnv, cssLoader,  styleLoader, postcssLoader} = require('./base.config');
 
 
 module.exports = {
@@ -33,7 +14,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist/assets/vendors'),
-    filename: '[name].[chunkhash:7].js',
+    filename: '[name].[hash:7].js',
     library: '[name]_library'
   },
   plugins: [
@@ -42,7 +23,7 @@ module.exports = {
       name: '[name]_library',
       context: __dirname // 执行的上下文环境，对之后DllReferencePlugin有用
     }),
-    new ExtractTextPlugin('[name].[chunkhash:7].css'),
+    new ExtractTextPlugin('[name].[hash:5].css'),
     new AssetsPlugin({
       filename: '../dist/assets/vendors/bundle-config.json',
       path: './vendors'
@@ -62,7 +43,7 @@ module.exports = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: 'img/[name].[hash:7].[ext]'
+          name: 'assets/images/[name].[hash:7].[ext]'
         }
       },
       {
@@ -70,14 +51,20 @@ module.exports = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: 'fonts/[name].[hash:7].[ext]'
+          name: 'assets/fonts/[name].[hash:7].[ext]'
         }
       },
       {
         test: /\.scss$/,
         use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          use: sassOptions,
-          fallback: styleLoaderOptions
+          use: [
+            cssLoader, postcssLoader,
+            {
+              loader: 'sass-loader',
+              options: config[argEnv].plugins.sass
+            }
+          ],
+          fallback: styleLoader
         }))
       },
     ]

@@ -1,21 +1,46 @@
 {
+  "plugins": {
+    "extractText": {
+      "filename": "assets/styles/[name].css",
+      "allChunks": true
+    },
+    "provide": {
+      "Vue": "vue",
+      "nx": "next-js-core2"
+    }
+  },
+  "devProxy": {
+    "/api": {
+      "target": "http://127.0.0.1:8080",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  },
   "dev": {
-    "port": 8080,
+    "entry": "./src/pages/**/app.js",
+    "port": 8012,
     "publicPath": "/",
-    "sass": {
-      "sourceMap": true,
-      "outputStyle": "expanded"
+    "plugins": {
+      "sass": {
+        "sourceMap": true,
+        "outputStyle": "expanded"
+      }
     },
     "libs": {
       "vue": "/vue/dist/vue.runtime.min.js"
     }
   },
   "prd": {
+    "entry": "./src/pages/**/app.js",
     "port": 9080,
     "publicPath": "/my-project/",
-    "sass": {
-      "sourceMap": false,
-      "outputStyle": "compressed"
+    "plugins": {
+      "sass": {
+        "sourceMap": false,
+        "outputStyle": "compressed"
+      }
     },
     "libs": {
       "vue": "https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.runtime.min.js"

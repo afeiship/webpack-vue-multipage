@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
-    "predev": "npm run clean && webpack --mode development --progress --config build/webpack.dll.conf.js --env=dev",
-    "prebuild": "npm run clean && webpack --mode production --progress --config build/webpack.dll.conf.js --env=prd",
+    "predev": "npm run clean && webpack --mode development --config build/webpack.dll.conf.js --env=dev",
+    "prebuild": "npm run clean && webpack --mode production --config build/webpack.dll.conf.js --env=prd",
     "dev": "webpack-dev-server --inline --hot --config build/webpack.dev.conf.js --env=dev",
     "build": "webpack --mode production --progress --config build/webpack.prod.conf.js --env=prd"
   },
@@ -44,6 +44,7 @@
     "html-loader": "^0.5.0",
     "html-webpack-plugin": "^3.2.0",
     "import-glob-loader": "^1.1.0",
+    "next-key-map": "github:afeiship/next-key-map",
     "node-sass": "^4.5.3",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "postcss-loader": "^2.0.6",
