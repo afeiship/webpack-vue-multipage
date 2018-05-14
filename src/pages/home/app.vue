@@ -5,7 +5,7 @@
         </div>
         <img v-bind:src="logoImg" class="wp-2 auto logo">
         <header>
-            <p style="color:#000; padding: 20px; border:1px dashed #ccc;">Import by views/*.scss</p>
+            <p style=" background: #fff; color:#333; padding: 20px; border:1px dashed #ccc;">Import by views/*.scss</p>
             <h1>H1 title (I am styled by views/test1.scss)</h1>
             <h2>H2 title (I am styled by views/test2.scss)</h2>
         </header>
@@ -33,7 +33,7 @@
           duration: 6000
         })
       },
-      click1(){
+      click1() {
         console.log('click!');
       }
     }
@@ -50,14 +50,14 @@
         display: flex;
         color: var(--color);
     }
-    
-    button{
+
+    button {
         border: none;
         outline: none;
         display: block;
-        width:100%;
+        width: 100%;
         padding: 10px;
-        color:#fff;
+        color: #fff;
         margin-bottom: 10px;
         background: #4cd964;
     }

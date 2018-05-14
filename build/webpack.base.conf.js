@@ -28,14 +28,15 @@ glob.sync('./src/pages/**/app.js').forEach(path => {
   entries[chunk] = path;
   chunks.push(chunk);
   const filename = chunk + '.html';
-  const basePath = cfg[argEnv].basePath;
+  const basePath = cfg[argEnv].publicPath + 'assets/vendors/';
   const htmlConf = {
     filename: filename,
     template: path.replace(/.js/g, '.ejs'),
     inject: 'body',
-    // favicon: './src/assets/images/logo.png',
+    favicon: './src/assets/images/logo.png',
     libJs: [basePath, bundleConfig.libs.js].join(''),
     libCss: [basePath, bundleConfig.libs.css].join(''),
+    libs: cfg[argEnv].libs,
     hash: true,
     chunks: ['commons', chunk]
   };
@@ -58,7 +59,6 @@ const sassOptions = [...cssOptions, {
   loader: 'sass-loader',
   options: cfg[argEnv].sass
 }];
-
 
 
 const config = {

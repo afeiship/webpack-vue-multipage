@@ -1,11 +1,16 @@
 'use strict';
 const merge = require('webpack-merge');
+const { resolve } = require('path');
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
+    contentBase: [
+      resolve(__dirname, '../dist'),
+      resolve(__dirname, '../node_modules')
+    ],
     host: 'localhost',
     port: 8012,
     historyApiFallback: false,

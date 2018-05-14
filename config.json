@@ -1,20 +1,24 @@
 {
   "dev": {
     "port": 8080,
-    "basePath": "/dist/assets/vendors/",
     "publicPath": "/",
     "sass": {
       "sourceMap": true,
       "outputStyle": "expanded"
+    },
+    "libs": {
+      "vue": "/vue/dist/vue.runtime.min.js"
     }
   },
   "prd": {
     "port": 9080,
-    "basePath": "/my-project/assets/vendors/",
     "publicPath": "/my-project/",
     "sass": {
       "sourceMap": false,
       "outputStyle": "compressed"
+    },
+    "libs": {
+      "vue": "https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.runtime.min.js"
     }
   }
 }
