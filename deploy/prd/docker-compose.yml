@@ -5,5 +5,6 @@ services:
       volumes:
         - ./deploy/prd/conf.d:/etc/nginx/conf.d
         - /work/dist:/www
+        - /work/deploy:/deploy
       ports:
         - "9092:80"
