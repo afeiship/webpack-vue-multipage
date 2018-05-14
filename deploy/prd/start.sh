@@ -3,5 +3,5 @@
 ## for production env
 
 ## reload
-docker-compose -f ./docker-compose.yml down
-docker-compose -f ./docker-compose.yml up -d
+docker-compose -f ./deploy/prd/docker-compose.yml down
+docker-compose -f ./deploy/prd/docker-compose.yml up -d
