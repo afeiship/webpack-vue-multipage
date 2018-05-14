@@ -1,8 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 提取css
-const AssetsPlugin = require('assets-webpack-plugin'); // 生成文件名，配合HtmlWebpackPlugin增加打包后dll的缓存
-const {config, argEnv, cssLoader,  styleLoader, postcssLoader} = require('./base.config');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
 
 
 module.exports = {
@@ -14,19 +13,19 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist/assets/vendors'),
-    filename: '[name].[hash:7].js',
+    filename: '[name].[chunkhash:7].js',
     library: '[name]_library'
   },
   plugins: [
     new webpack.DllPlugin({
       path: path.resolve(__dirname, '../dist/assets/vendors/[name]-mainfest.json'),
       name: '[name]_library',
-      context: __dirname // 执行的上下文环境，对之后DllReferencePlugin有用
+      context: __dirname
     }),
-    new ExtractTextPlugin('[name].[hash:5].css'),
+    new ExtractTextPlugin('[name].[hash:7].css'),
     new AssetsPlugin({
-      filename: '../dist/assets/vendors/bundle-config.json',
-      path: './vendors'
+      filename: 'bundle-config.json',
+      path:path.resolve(__dirname, '../dist/assets/vendors')
     }),
   ],
   module: {
@@ -34,38 +33,21 @@ module.exports = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader']
         })
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: 'assets/images/[name].[hash:7].[ext]'
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: 'assets/fonts/[name].[hash:7].[ext]'
-        }
+        test: /\.scss$/,
+        loader: 'import-glob-loader',
+        enforce: "pre"
       },
       {
         test: /\.scss$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          use: [
-            cssLoader, postcssLoader,
-            {
-              loader: 'sass-loader',
-              options: config[argEnv].plugins.sass
-            }
-          ],
-          fallback: styleLoader
-        }))
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader', 'sass-loader']
+        })
       },
     ]
   },
