@@ -35,7 +35,7 @@
   "prd": {
     "entry": "./src/pages/**/app.js",
     "port": 9080,
-    "publicPath": "/my-project/",
+    "publicPath": "/",
     "plugins": {
       "sass": {
         "sourceMap": false,
