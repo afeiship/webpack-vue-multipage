@@ -15,20 +15,20 @@ npm run dev
 + [x] next/next-package/next-class intergrete
 + [x] import file/*.scss
 + [x] docker / docker-compose migrate
-+ [ ] optimize webpack scripts
++ [x] optimize webpack scripts
 + [ ] optimize env
 + [ ] module configuration
 
 
 ## development
 ```bash
-./docker-build.sh
+cd /data/h5/webpack-vue-multipage
+./deploy/dev/start.sh 
 ```
 
 ## production:
 ```bash
-cd /data/webpack-vue-multipage
-./start.sh
-
-## check: sudo docker ps
+cd /data/h5/webpack-vue-multipage
+./deploy/prd/start.sh 
+## check: docker ps
 ```
