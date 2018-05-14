@@ -3,7 +3,7 @@ services:
     web:
       image: nginx
       volumes:
-        - ./deploy/nginx/conf.d:/etc/nginx/conf.d
-        - ./dist:/www/zb-activity
+        - ./conf.d:/etc/nginx/conf.d
+        - ./dist:/www
       ports:
         - "9092:80"

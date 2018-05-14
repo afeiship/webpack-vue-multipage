@@ -10,7 +10,7 @@ docker run -it -v $PWD:/work -w /work node /work/deploy/dev/build.sh
 
 ## package for prd env
 rm -rf $PACKAGE_NAME.tar.gz
-tar zcf $PACKAGE_NAME.tar.gz ./dist start.sh docker-compose.yml ./deploy
+tar zcf $PACKAGE_NAME.tar.gz ./dist ./deploy
 
 ## reload
 docker-compose -f ./docker-compose.yml down
