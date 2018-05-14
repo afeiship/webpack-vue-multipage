@@ -18,3 +18,17 @@ npm run dev
 + [ ] optimize webpack scripts
 + [ ] optimize env
 + [ ] module configuration
+
+
+## development
+```bash
+./docker-build.sh
+```
+
+## production:
+```bash
+cd /data/webpack-vue-multipage
+./start.sh
+
+## check: sudo docker ps
+```
