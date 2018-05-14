@@ -3,7 +3,7 @@ services:
     web:
       image: nginx
       volumes:
-        - ./deploy/dev/conf.d:/etc/nginx/conf.d
+        - ./conf.d:/etc/nginx/conf.d
         - ../../dist:/www
       ports:
         - "9081:80"
