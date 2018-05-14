@@ -6,4 +6,4 @@ services:
         - ./deploy/prd/conf.d:/etc/nginx/conf.d
         - ../../dist:/www
       ports:
-        - "9092:80"
+        - "9081:80"
