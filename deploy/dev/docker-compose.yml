@@ -4,6 +4,6 @@ services:
       image: nginx
       volumes:
         - ./deploy/prd/conf.d:/etc/nginx/conf.d
-        - /work/dist:/www
+        - ../../dist:/www
       ports:
         - "9092:80"
