@@ -13,5 +13,5 @@ rm -rf $PACKAGE_NAME.tar.gz
 tar zcf $PACKAGE_NAME.tar.gz ./dist ./deploy
 
 ## reload
-docker-compose -f docker-compose.yml down
-docker-compose -f docker-compose.yml up -d
+docker-compose -f ./deploy/dev/docker-compose.yml down
+docker-compose -f ./deploy/dev/docker-compose.yml up -d
