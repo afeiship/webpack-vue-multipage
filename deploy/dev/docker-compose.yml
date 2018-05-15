@@ -1,6 +1,6 @@
 version: "3"
 services:
-    web:
+    webpack-vue-multipage:
       image: nginx
       volumes:
         - ./conf.d:/etc/nginx/conf.d
