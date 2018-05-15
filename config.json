@@ -9,15 +9,6 @@
       "nx": "next-js-core2"
     }
   },
-  "devProxy": {
-    "/api": {
-      "target": "http://127.0.0.1:8080",
-      "changeOrigin": true,
-      "pathRewrite": {
-        "^/api": ""
-      }
-    }
-  },
   "dev": {
     "entry": "./src/pages/**/app.js",
     "port": 8012,
@@ -30,6 +21,15 @@
     },
     "libs": {
       "vue": "/vue/dist/vue.runtime.min.js"
+    },
+    "proxy": {
+      "/api": {
+        "target": "http://127.0.0.1:8080",
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/api": ""
+        }
+      }
     }
   },
   "prd": {

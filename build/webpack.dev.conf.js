@@ -16,7 +16,7 @@ module.exports = merge(baseWebpackConfig, {
     port: config[argEnv].port,
     historyApiFallback: false,
     noInfo: true,
-    proxy: config.devProxy,
+    proxy: config[argEnv].proxy,
     open: true,
     openPage: 'home.html'
   }
