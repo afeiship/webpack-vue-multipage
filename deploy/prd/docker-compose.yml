@@ -4,6 +4,6 @@ services:
       image: nginx
       volumes:
         - ./conf.d:/etc/nginx/conf.d
-        - ../../dist:/www
+        - /work/dist:/www
       ports:
         - "9081:80"
