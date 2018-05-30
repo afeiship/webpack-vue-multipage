@@ -17,6 +17,7 @@
     "next-js-core2": "github:afeiship/next-js-core2",
     "next-param": "github:afeiship/next-param",
     "vue": "^2.5.16",
+    "vuex": "^3.0.1",
     "webkit-sass-flexbox-grid": "github:afeiship/webkit-sass-flexbox-grid",
     "webkit-sass-functions": "github:afeiship/webkit-sass-functions",
     "webkit-sass-generators": "github:afeiship/webkit-sass-generators",
