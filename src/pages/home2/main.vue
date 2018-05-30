@@ -1,7 +1,7 @@
 <template>
     <div id="home-view" class="auto tc wp-7">
         <div class="dd" style="color:#333;">
-            Home - show: {{ show }}
+            Home - show
         </div>
         <img v-bind:src="logoImg" class="wp-2 auto logo">
         <header>
@@ -17,13 +17,11 @@
 <script>
   import logo from 'assets/images/logo.png';
   import {$api} from 'components';
-  import {mapState} from 'vuex';
-
+  import AppBase from './app.vue';
 
   export default {
     data() {
       return {
-        ...this.$store.state,
         msg: 'Use Vue 2.0 Today!',
         logoImg: logo
       }
@@ -38,13 +36,20 @@
         })
       },
       click1() {
-        $api.login({
-          username: 'admin',
-          password: '123123'
-        }).then(resp => {
-          console.log('resp');
-          this.show = !this.show;
-        });
+        // $api.login({
+        //   username: 'admin',
+        //   password: '123123'
+        // }).then(resp => {
+        //   console.log(AppBase.$.memory);
+        //   AppBase.$.session ={
+        //     test:123
+        //   };
+        //   console.log('resp');
+        // });
+
+        AppBase.$.session ={
+          test:123
+        };
       }
     }
   }
