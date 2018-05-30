@@ -15,7 +15,8 @@
 </template>
 
 <script>
-  import logo from 'assets/images/logo.png'
+  import logo from 'assets/images/logo.png';
+  import {$api} from 'components';
 
   export default {
     data() {
@@ -34,6 +35,12 @@
         })
       },
       click1() {
+        $api.login({
+          username: 'admin',
+          password: '123123'
+        }).then(resp => {
+          console.log('resp');
+        });
         console.log('click!');
       }
     }

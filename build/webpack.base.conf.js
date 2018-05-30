@@ -18,6 +18,8 @@ module.exports = {
     alias: {
       assets: join(__dirname, '../src/assets'),
       components: join(__dirname, '../src/components'),
+      services: join(__dirname, '../src/components/services'),
+      interceptors: join(__dirname, '../src/components/interceptors'),
       images: join(__dirname, '../src/assets/images')
     }
   },
